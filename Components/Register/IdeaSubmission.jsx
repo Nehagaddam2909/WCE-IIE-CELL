@@ -1,15 +1,22 @@
 import logo from "../../public/assets/images/question.png";
 import Image from "next/image";
-// import { Tooltip } from '@nextui-org/react';
+import React from "react";
+import RegisterQuestions from "../../data/registerQuestions";
+import Question from "./Question";
 
 const IdeaSubmission = () => {
+  const [visible, setVisible] = React.useState(false);
+  const handleClick = () => {
+    setVisible(!visible);
+    console.log(visible);
+  };
   return (
     <div className=" flex flex-col w items-center justify-center">
       <div className="my-3 tracking-wide font-medium text-[1.5rem]">
         Idea Submission
       </div>
-      <form className="flex flex-col space-y-4">
-        <div className="flex items-center space-x-4">
+      <form className="grid grid-cols-1 md:grid-cols-2 space-y-4">
+        <div className="flex items-center justify-evenly  space-x-4">
           <label>Title:</label>
           <input type="text" className="p-1 outline outline-1 bg-gray-50" />
         </div>
@@ -27,7 +34,7 @@ const IdeaSubmission = () => {
             className="p-1 bg-gray-50"
             value={"Student"}
           />
-          <label for="id1">Student</label>
+          <label htmlFor="id1">Student</label>
           <input
             type="radio"
             name="type"
@@ -36,7 +43,7 @@ const IdeaSubmission = () => {
             value={"Faculty"}
           />
 
-          <label for="id2">Faculty</label>
+          <label htmlFor="id2">Faculty</label>
         </div>
         <div className="flex items-center space-x-4">
           <label>Mobile No:</label>
@@ -81,49 +88,21 @@ const IdeaSubmission = () => {
             className="p-1 outline outline-1 bg-gray-50"
           />
         </div>
-
-        <div className="flex space-x-4">
-          <label>Relevance </label>
+        {RegisterQuestions.map((ele, idx) => (
+          <Question
+            key={idx}
+            logo={logo}
+            title={ele.title}
+            desc={ele.desc}
+          ></Question>
+        ))}
+        <div className="flex justify-center">
           <button
-            data-tooltip-target="tooltip-dark"
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="submit"
+            className="p-2 rounded-xl w-[8rem] border bg-primary text-white"
           >
-            Dark
+            Submit Idea
           </button>
-          <div
-            id="tooltip-dark"
-            role="tooltip"
-            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-          >
-            Tooltip content
-            <div className="tooltip-arrow" data-popper-arrow></div>
-          </div>
-          <textarea
-            accept=".pdf,.docx"
-            className="p-1 outline outline-1 bg-gray-50"
-          />
-        </div>
-        <div className="flex space-x-4">
-          <label>Potential for impact:</label>
-          <textarea
-            accept=".pdf,.docx"
-            className="p-1 outline outline-1 bg-gray-50"
-          />
-        </div>
-        <div className="flex space-x-4">
-          <label>Viability :</label>
-          <textarea
-            accept=".pdf,.docx"
-            className="p-1 outline outline-1 bg-gray-50"
-          />
-        </div>
-        <div className="flex space-x-4">
-          <label>Applicability :</label>
-          <textarea
-            accept=".pdf,.docx"
-            className="p-1 outline outline-1  bg-gray-50"
-          />
         </div>
       </form>
     </div>
