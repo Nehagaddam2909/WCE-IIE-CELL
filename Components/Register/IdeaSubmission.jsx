@@ -5,17 +5,17 @@ import RegisterQuestions from "../../data/registerQuestions";
 import Question from "./Question";
 
 const IdeaSubmission = () => {
-  const [visible, setVisible] = React.useState(false);
+
   const handleClick = () => {
     setVisible(!visible);
     console.log(visible);
   };
   return (
-    <div className=" flex flex-col  items-center justify-center">
+    <div className=" flex flex-col w-full items-center justify-center">
       <div className="my-3 tracking-wide font-medium text-[1.5rem]">
         Idea Submission
       </div>
-      <form className="grid grid-cols-1 md:grid-cols-2 space-x-12 space-y-5">
+      <form className="grid grid-cols-1 md:grid-cols-2 space-x-12 space-y-5" method="post">
         <div className="grid grid-cols-2 items-center space-x-4">
           <label className="ml-5">Title:</label>
           <input type="text" className="p-1 outline outline-1 bg-gray-50" />
