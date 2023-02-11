@@ -18,12 +18,9 @@ module.exports = {
       //   'gdsc-gradient-reverse': 'linear-gradient(90deg, ##4285f4 0%, #0F9D58 20%, #f4b400 40%, #db4437 60%, ##4285f4 80%)',
       // },
       colors: {
-        'gdsc-blue': '#4285f4',
-        'gdsc-red': '#db4437',
-        'gdsc-yellow': '#f4b400',
-        'gdsc-green': '#0f9d58',
-        'gdsc-gradient': 'linear-gradient(90deg, ##4285f4 0%, #db4437 20%, #f4b400 40%, #0F9D58 60%, ##4285f4 80%)',
-        'gdsc-gradient-reverse': 'linear-gradient(90deg, ##4285f4 0%, #0F9D58 20%, #f4b400 40%, #db4437 60%, ##4285f4 80%)',
+        
+          primary: '#FA183E',
+        
 
       },
       fontFamily: {

@@ -49,7 +49,7 @@ const Sidebar = ({ showSidebar, setshowSidebar }) => {
         <div className="flex-1">
           <ul className="pt-2 pb-4 space-y-1 text-sm ">
             {NavbarLinks.map((link, index) => (
-              <li className="rounded-sm">
+              <li key={index} className="rounded-sm">
                 <a
                   rel="noopener noreferrer"
                   href="#"
