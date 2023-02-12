@@ -6,45 +6,59 @@ const IdeaSubmission = () => {
 	// 	console.log(visible);
 	// };
 	const [data, setData] = useState({
-		title: '',
-		leader: '',
+		title: 'title 1',
+		leader: 'Nehal Ughade',
 		type: 'student',
-		phone: '',
+		phone: '8879730077',
+		email:'nehal.ughade@walchandsangli.ac.in',
 		department: 'CSE',
-		year: 'FY',
-		team: '',
+		year: 'TY',
+		team: 'Neha Gaddam,Lokesh patil',
 		report: undefined,
-		viability: '',
-		impact: '',
-		innovation: '',
-		applicability: '',
-		relevance: '',
+		viability: 'viabile',
+		impact: 'full impact',
+		innovation: 'nice innovation',
+		applicability: 'very very applicable',
+		relevance: 'ultra relevant',
 	});
-	const handleSubmit = async ()=>{
-		console.table(data);
+	const handleSubmit = async () => {
 		// fetch call , dont use axios
 		// post data as form data
 		const formData = new FormData();
-		formData.append('title',data.title);
-		formData.append('leader',data.leader);
-		formData.append('type',data.type);
-		formData.append('phone',data.phone);
-		formData.append('department',data.department);
-		formData.append('year',data.year);
-		formData.append('team',data.team);
-		formData.append('report',data.report);
-		formData.append('viability',data.viability);
-		formData.append('impact',data.impact);
-		formData.append('innovation',data.innovation);
-		formData.append('applicability',data.applicability);
-		formData.append('relevance',data.relevance);
-		const res = await fetch('http://localhost:5000/api/idea',{
-			method:'POST',
-			body:formData
-		});
-		const json = await res.json();
-		console.log(json);
-	}
+		formData.append('title', data.title);
+		formData.append('leader', data.leader);
+		formData.append('type', data.type);
+		formData.append('phone', data.phone);
+		formData.append('email', data.email);
+		formData.append('department', data.department);
+		formData.append('year', data.year);
+		formData.append('team', data.team);
+		formData.append('report', data.report);
+		formData.append('viability', data.viability);
+		formData.append('impact', data.impact);
+		formData.append('innovation', data.innovation);
+		formData.append('applicability', data.applicability);
+		formData.append('relevance', data.relevance);
+		console.table(formData);
+		try {
+			await fetch('http://localhost:5000/api/idea/submit', {
+				method: 'POST',
+				body: formData,
+			})
+				.then(async (res) => {
+					const data = await res.json();
+					console.log(data);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+
+			// console.log(json);
+		} catch (error) {
+			alert('Something went wrong!');
+			console.log(error);
+		}
+	};
 	return (
 		<form className='p-10'>
 			<h1 className='mb-8 text-center text-2xl font-extrabold md:text-5xl lg:text-4xl'>
@@ -64,7 +78,7 @@ const IdeaSubmission = () => {
 					/>
 					<label
 						htmlFor='title'
-						className='peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-10 pl-2' >
+						className='peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-10 pl-2'>
 						Title
 						{/* floating_email" class="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6 */}
 					</label>
@@ -90,7 +104,10 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<select
 						value={data.type}
-						onChange={(e) => { console.log(e.target.value); setData({ ...data, type: e.target.value })}}
+						onChange={(e) => {
+							console.log(e.target.value);
+							setData({ ...data, type: e.target.value });
+						}}
 						className='bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500'>
 						<option value='student'>Student</option>
 						<option value='teacher'>Teacher</option>
@@ -124,7 +141,9 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<select
 						value={data.department}
-						onChange={(e) => {  setData({ ...data, department: e.target.value })}}
+						onChange={(e) => {
+							setData({ ...data, department: e.target.value });
+						}}
 						className='bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500'>
 						<option value='CSE'>Computer Science and Engineering</option>
 						<option value='IT'>Information Technology</option>
@@ -192,13 +211,53 @@ const IdeaSubmission = () => {
 				</div>
 			</div>
 			<div className='grid md:grid-cols-2 md:gap-6'>
+			<div className='relative z-0 w-full mb-8 group'>
+					<input
+						type='email'
+						name='floating_phone'
+						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
+						placeholder=' '
+						value={data.email}
+						onChange={(e) => setData({ ...data, email: e.target.value })}
+						required
+					/>
+					<label
+						htmlFor='floating_phone'
+						className='peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-10 pl-2'>
+						Email
+					</label>
+					
+				</div>
+				<div className='relative z-0 w-full mb-8 group'>
+					<input
+						type='text'
+						name='floating_phone'
+						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
+						placeholder=' '
+						value={data.relevance}
+						onChange={(e) => setData({ ...data, relevance: e.target.value })}
+						required
+					/>
+					<label
+						htmlFor='floating_phone'
+						className='peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-10 pl-2'>
+						Relavance
+					</label>
+					<p className='text-sm text-gray-500 italic'>
+						* Whether the identified problem really exists in Society/Market/
+						Industry ? How big is the problem ? (Low, Moderate, High)
+					</p>
+				</div>
+				
+			</div>
+			<div className='grid md:grid-cols-2 md:gap-6'>
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
 						name='title'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
-						value={data.value}
+						value={data.viability}
 						onChange={(e) => setData({ ...data, viability: e.target.value })}
 						required
 					/>
@@ -272,7 +331,9 @@ const IdeaSubmission = () => {
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						value={data.applicability}
-						onChange={(e) => setData({ ...data, applicability: e.target.value })}
+						onChange={(e) =>
+							setData({ ...data, applicability: e.target.value })
+						}
 						required
 					/>
 					<label
@@ -291,28 +352,7 @@ const IdeaSubmission = () => {
 					</p>
 				</div>
 			</div>
-			<div className='grid md:grid-cols-2 md:gap-6'>
-				<div className='relative z-0 w-full mb-8 group'>
-					<input
-						type='text'
-						name='floating_phone'
-						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
-						placeholder=' '
-						value={data.relevance}
-						onChange={(e) => setData({ ...data, relevance: e.target.value })}
-						required
-					/>
-					<label
-						htmlFor='floating_phone'
-						className='peer-focus:font-medium absolute text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-10 pl-2'>
-						Relavance
-					</label>
-					<p className='text-sm text-gray-500 italic'>
-						* Whether the identified problem really exists in Society/Market/
-						Industry ? How big is the problem ? (Low, Moderate, High)
-					</p>
-				</div>
-			</div>
+			
 			<button
 				type='button'
 				onClick={handleSubmit}

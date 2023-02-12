@@ -3,7 +3,7 @@ import NavbarLinks from "../../../data/navbarLinks";
 const Sidebar = ({ showSidebar, setshowSidebar }) => {
   return (
     <div
-      className={`flex flex-col ${
+      className={`flex flex-col z-50 ${
         showSidebar ? " block w-60" : "hidden"
       } transition-all duration-500 ease-in-out  fixed top-0 left-0  lg:hidden h-full p-3 bg-white  border-r border-gray-300 shadow-xl`}
     >
