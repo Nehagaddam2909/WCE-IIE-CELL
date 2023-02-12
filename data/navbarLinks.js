@@ -1,30 +1,30 @@
 const NavbarLinks = [
     {
       name: "About Us",
-      link: "/",
+      link: "/about",
       // logo:
     },
     {
       name: "Partners",
-      link: "/",
+      link: "/partners",
     },
   
     {
       name: "Our Team",
   
-      link: "/",
+      link: "/team",
     },
     {
       name: "Incubatees",
-      link: "/",
+      link: "/incubatees",
     },
     {
       name: "Events",
-      link: "/",
+      link: "/events",
     },
     {
       name: "E-CELL club",
-      link: "/",
+      link: "/club",
     },
   ];
 

@@ -47,7 +47,7 @@ const Navbar = () => {
 					))}
 				</div>
 				<Link
-					href='/'
+					href='/register'
 					className='Reach-us hidden lg:block text-white bg-primary whitespace-nowrap rounded-2xl py-1 px-5 mx-10'>
 					Reach us
 				</Link>

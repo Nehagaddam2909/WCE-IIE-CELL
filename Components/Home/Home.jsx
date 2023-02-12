@@ -1,20 +1,20 @@
-import React from "react";
+import React from 'react';
+import Section1 from './Section1/Section1';
+import Events from './events/Events';
+import Impact from './Impact/Impact';
+import Footer from '../Footer/Footer';
 
 const Home = () => {
-  return (
-    <div className="Home-container h-[80vh] flex">
-      <div className="left h-full w-1/2 flex flex-col justify-center items-center">
-        <p className="text-primary text-sm">
-          INNOVATION INCUBATION AND eNTREPRENEURSHIP CELL WCE
-        </p>
-        <p className="text-lg font-semibold w-3/4">
-          Nurturing Innovations Creating Enterprises
-        </p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus ac nulla vitae fermentum. In placerat eros a purus ornare Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus ac nulla vitae fermentum. In placerat eros a purus ornare</p>
-      </div>
-      <div className="carousal w-1/2"></div>
-    </div>
-  );
+	return (
+		<>
+    <div className='px-6 md:p-0'>
+			<Section1 />
+			<Events />
+			<Impact />
+		</div>
+		<Footer />
+    </>
+	);
 };
 
 export default Home;

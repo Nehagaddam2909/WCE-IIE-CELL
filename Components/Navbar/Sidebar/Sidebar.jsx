@@ -51,14 +51,23 @@ const Sidebar = ({ showSidebar, setshowSidebar }) => {
             {NavbarLinks.map((link, index) => (
               <li key={index} className="rounded-sm">
                 <a
-                  rel="noopener noreferrer"
-                  href="#"
+                  // rel="noopener noreferrer"
+                  href={link}
                   className="flex hover:text-primary pl-5 items-center p-2 space-x-3 rounded-md"
                 >
                   <span>{link.name}</span>
                 </a>
               </li>
             ))}
+             <li  className="rounded-sm">
+                <a
+                  // rel="noopener noreferrer"
+                  href='/register'
+                  className="flex hover:text-primary pl-5 items-center p-2 space-x-3 rounded-md"
+                >
+                  <span>Reach us</span>
+                </a>
+              </li>
           </ul>
         </div>
       </div>
