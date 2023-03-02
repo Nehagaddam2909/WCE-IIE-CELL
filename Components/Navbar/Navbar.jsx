@@ -11,7 +11,7 @@ const Navbar = () => {
 		<div className='Navbar-container flex border border-b-gray-300  items-center h-24 justify-between px-5 lg:px-5 xl:px-10'>
 			<div className='Navbar-logo mr-5'>
 				<Link href='/'>
-					<Image className='w-80 cursor-pointer' src={Logo} alt='WCE Logo' />
+					<Image className='w-[22rem] cursor-pointer' src={Logo} alt='WCE Logo' />
 				</Link>
 			</div>
 			{/* Hamburger menu */}
@@ -49,7 +49,7 @@ const Navbar = () => {
 				<Link
 					href='/register'
 					className='Reach-us hidden lg:block text-white bg-primary whitespace-nowrap rounded-2xl py-1 px-5 mx-10'>
-					Reach us
+					Enrollment
 				</Link>
 			</div>
 			{/* aaaaaaaa */}

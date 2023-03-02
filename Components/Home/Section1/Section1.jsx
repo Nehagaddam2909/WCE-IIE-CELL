@@ -13,16 +13,14 @@ const Section1 = () => {
 					Nurturing Innovations Creating Enterprises
 				</p>
 				<p className='font-normal'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed faucibus
-					ac nulla fermentum. In placerat eros a purus ornare Lorem ipsum dolor
-					sit amet, consectetur adipiscing elit. Sed faucibus ac nulla vitae
-					fermentum. In placerat eros a purus ornare
+					The Innovation Incubation and Entrepreneurship Cell (IIEC) at Walchand College of Engineering is a hub of creativity, innovation, and entrepreneurial spirit. The IIEC was established with the objective of nurturing and supporting the next generation of entrepreneurs and innovators by providing them with the resources, guidance, and support they need to turn their ideas into successful businesses.
+					
 				</p>
 				<div className='flex space-x-5 pt-5'>
 					<Link
 						href='/register'
 						className='flex items-center text-white bg-primary whitespace-nowrap rounded-full py-2 px-7'>
-						Reach us
+						Enrollment
 					</Link>
 					<Link
 						href='/register'

@@ -19,7 +19,7 @@ const Footer = () => {
 						/>
 					</Link>
 					<div className='IIE-CELl-WCE-Powered-by font-bold text-lg '>
-					INNOVATION INCUBATION AND ENTREPRENEURSHIP CELL WCE
+					WCE - INNOVATION INCUBATION AND ENTREPRENEURSHIP CELL 
 
 					</div>
 					<Link href='https://www.google.com/maps/place/Walchand+College+of+Engineering/@16.8457387,74.5992688,17z/data=!3m1!4b1!4m5!3m4!1s0x3bc1237f52c65db5:0xa3535676176ded0a!8m2!3d16.8457387!4d74.6014575' target='_blank' className='WCE-address '>

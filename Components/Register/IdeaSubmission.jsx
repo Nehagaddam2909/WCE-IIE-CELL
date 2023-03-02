@@ -3,16 +3,16 @@ import React, { useState } from 'react';
 const IdeaSubmission = () => {
 	// const handleClick = () => {
 	// 	setVisible(!visible);
-	// 	console.log(visible);
+	// 	// console.log(visible);
 	// };
 	const [data, setData] = useState({
 		title: '',
 		leader: '',
-		type: '',
+		type: 'student',
 		phone: '',
-		email:'',
-		department: '',
-		year: '',
+		email: '',
+		department: 'CSE',
+		year: 'Btech-FY',
 		team: '',
 		report: undefined,
 		viability: '',
@@ -27,56 +27,62 @@ const IdeaSubmission = () => {
 		// bool flag to check validity
 		let flag = 1;
 		// check if all fields are filled
-		for(const key in data){
-			if(data[key]==undefined || data[key].length==0){
-				alert("Please fill required fileds !")
+		for (const key in data) {
+			// console.log(key);
+			if (data[key] == undefined || data[key].length == 0) {
+				alert('Please fill required fileds !');
 				flag = 0;
 				return;
 			}
 		}
 
-		if(flag)
-		{const formData = new FormData();
-		formData.append('title', data.title);
-		formData.append('leader', data.leader);
-		formData.append('type', data.type);
-		formData.append('phone', data.phone);
-		formData.append('email', data.email);
-		formData.append('department', data.department);
-		formData.append('year', data.year);
-		formData.append('team', data.team);
-		formData.append('report', data.report);
-		formData.append('viability', data.viability);
-		formData.append('impact', data.impact);
-		formData.append('innovation', data.innovation);
-		formData.append('applicability', data.applicability);
-		formData.append('relevance', data.relevance);
-		console.table(formData);
-		try {
-			await fetch('http://localhost:5000/api/idea/submit', {
-				method: 'POST',
-				body: formData,
-			})
-				.then(async (res) => {
-					const data = await res.json();
-					console.log(data);
+		if (flag) {
+			const formData = new FormData();
+			formData.append('title', data.title);
+			formData.append('leader', data.leader);
+			formData.append('type', data.type);
+			formData.append('phone', data.phone);
+			formData.append('email', data.email);
+			formData.append('department', data.department);
+			formData.append('year', data.year);
+			formData.append('team', data.team);
+			formData.append('report', data.report);
+			formData.append('viability', data.viability);
+			formData.append('impact', data.impact);
+			formData.append('innovation', data.innovation);
+			formData.append('applicability', data.applicability);
+			formData.append('relevance', data.relevance);
+			console.table(formData);
+			try {
+				await fetch('http://10.7.7.241:5000/api/idea/submit', {
+					method: 'POST',
+					body: formData,
 				})
-				.catch((err) => {
-					console.log(err);
-				});
+					.then(async (res) => {
+						const data = await res.json();
+						// console.log(data);
+						if (data.success) {
+							alert('Idea submitted successfully !');
+						} else {
+							alert('Something went wrong !');
+						}
+					})
+					.catch((err) => {
+						// console.log(err);
+					});
 
-			// console.log(json);
-		} catch (error) {
-			alert('Something went wrong!');
-			console.log(error);
-		}}
+				// // console.log(json);
+			} catch (error) {
+				alert('Something went wrong!');
+				// console.log(error);
+			}
+		}
 	};
 	return (
 		<form className='p-6 md:p-10'>
 			<h1 className='mb-12 text-center text-2xl font-extrabold md:text-5xl lg:text-4xl'>
-				Idea Submission
+				Enrollment for Pre-Incubation
 			</h1>
-
 			<div className='grid md:grid-cols-2 md:gap-6'>
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
@@ -84,7 +90,7 @@ const IdeaSubmission = () => {
 						name='title'
 						className='block py-2.5 px-0 w-full pl-3   bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer '
 						placeholder=' '
-						maxLength={255} 
+						maxLength={255}
 						value={data.title}
 						onChange={(e) => setData({ ...data, title: e.target.value })}
 						required
@@ -93,7 +99,6 @@ const IdeaSubmission = () => {
 						htmlFor='title'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
 						Title
-						
 					</label>
 				</div>
 				<div className='relative z-0 w-full mb-8 group'>
@@ -120,7 +125,7 @@ const IdeaSubmission = () => {
 						required
 						value={data.type}
 						onChange={(e) => {
-							console.log(e.target.value);
+							// console.log(e.target.value);
 							setData({ ...data, type: e.target.value });
 						}}
 						className='bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500'>
@@ -182,10 +187,12 @@ const IdeaSubmission = () => {
 						value={data.year}
 						onChange={(e) => setData({ ...data, year: e.target.value })}
 						className='bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500'>
-						<option value='FY'>First Year</option>
-						<option value='SY'>Second Year</option>
-						<option value='TY'>Third Year</option>
-						<option value='Btech'>Final Year</option>
+						<option value='Btech-FY'>(Btech) First Year</option>
+						<option value='Btech-SY'>(Btech) Second Year</option>
+						<option value='Btech-TY'>(Btech) Third Year</option>
+						<option value='Btech'>(Btech) Final Year</option>
+						<option value='Mtech-FY'>(Mtech) First Year</option>
+						<option value='Mtech'>(Mtech) Final Year</option>
 					</select>
 
 					<label
@@ -232,11 +239,11 @@ const IdeaSubmission = () => {
 				</div>
 			</div>
 			<div className='grid md:grid-cols-2 md:gap-6'>
-			<div className='relative z-0 w-full mb-8 group'>
+				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='email'
 						name='floating_phone'
-						pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+						pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:invalid:border-red-600  focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
@@ -249,7 +256,6 @@ const IdeaSubmission = () => {
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3 '>
 						Email
 					</label>
-					
 				</div>
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
@@ -269,10 +275,9 @@ const IdeaSubmission = () => {
 					</label>
 					<p className='text-sm text-gray-500 italic'>
 						* Whether the identified problem really exists in Society/Market/
-						Industry ? How big is the problem ? (Low, Moderate, High)
+						Industry ? How big is the problem ? (Low, Moderate, High) 
 					</p>
 				</div>
-				
 			</div>
 			<div className='grid md:grid-cols-2 md:gap-6'>
 				<div className='relative z-0 w-full mb-8 group'>
@@ -380,14 +385,15 @@ const IdeaSubmission = () => {
 					</p>
 				</div>
 			</div>
-			
-			
-			<div className='flex justify-center '><button
-				type='button'
-				onClick={handleSubmit}
-				className='text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
-				Submit
-			</button></div>
+
+			<div className='flex justify-center '>
+				<button
+					type='button'
+					onClick={handleSubmit}
+					className='text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg  w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>
+					Submit
+				</button>
+			</div>
 		</form>
 	);
 };
