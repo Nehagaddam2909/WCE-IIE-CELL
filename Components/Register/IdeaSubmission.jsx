@@ -7,23 +7,23 @@ const IdeaSubmission = () => {
 	// };
 	const [data, setData] = useState({
 		title: '',
-		leader: '',
-		type: 'student',
-		phone: '',
+		team_leader: '',
+		role: 'student',
+		mobile_no: '',
 		email: '',
 		department: 'CSE',
 		year: 'Btech-FY',
-		team: '',
+		team_member: '',
 		report: undefined,
 		viability: '',
-		impact: '',
+		potential: '',
 		innovation: '',
 		applicability: '',
 		relevance: '',
 	});
 	const handleSubmit = async () => {
 		// fetch call , dont use axios
-
+		// console.table(data)
 		// bool flag to check validity
 		let flag = 1;
 		// check if all fields are filled
@@ -39,28 +39,28 @@ const IdeaSubmission = () => {
 		if (flag) {
 			const formData = new FormData();
 			formData.append('title', data.title);
-			formData.append('leader', data.leader);
-			formData.append('type', data.type);
-			formData.append('phone', data.phone);
+			formData.append('team_leader', data.team_leader);
+			formData.append('role', data.role);
+			formData.append('mobile_no', data.mobile_no);
 			formData.append('email', data.email);
 			formData.append('department', data.department);
 			formData.append('year', data.year);
-			formData.append('team', data.team);
+			formData.append('team_member', data.team_member);
 			formData.append('report', data.report);
 			formData.append('viability', data.viability);
-			formData.append('impact', data.impact);
+			formData.append('potential', data.potential);
 			formData.append('innovation', data.innovation);
 			formData.append('applicability', data.applicability);
 			formData.append('relevance', data.relevance);
-			console.table(formData);
+			// console.table(formData);
 			try {
-				await fetch('http://10.7.7.241:5000/api/idea/submit', {
+				await fetch('http://localhost:5000/api/idea/submit', {
 					method: 'POST',
 					body: formData,
 				})
 					.then(async (res) => {
 						const data = await res.json();
-						// console.log(data);
+						console.log(data);
 						if (data.success) {
 							alert('Idea submitted successfully !');
 						} else {
@@ -68,7 +68,7 @@ const IdeaSubmission = () => {
 						}
 					})
 					.catch((err) => {
-						// console.log(err);
+						console.log(err);
 					});
 
 				// // console.log(json);
@@ -104,18 +104,18 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
-						name='Name of the leader'
+						name='Name of the team_leader'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
-						value={data.leader}
-						onChange={(e) => setData({ ...data, leader: e.target.value })}
+						value={data.team_leader}
+						onChange={(e) => setData({ ...data, team_leader: e.target.value })}
 						required
 					/>
 					<label
-						htmlFor='Name of the leader'
+						htmlFor='Name of the team_leader'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
-						Name of the leader
+						Name of the team_leader
 					</label>
 				</div>
 			</div>
@@ -123,10 +123,10 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<select
 						required
-						value={data.type}
+						value={data.role}
 						onChange={(e) => {
 							// console.log(e.target.value);
-							setData({ ...data, type: e.target.value });
+							setData({ ...data, role: e.target.value });
 						}}
 						className='bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500'>
 						<option value='student'>Student</option>
@@ -134,7 +134,7 @@ const IdeaSubmission = () => {
 					</select>
 
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1'>
 						Select type
 					</label>
@@ -143,18 +143,18 @@ const IdeaSubmission = () => {
 					<input
 						type='tel'
 						pattern='^[6-9]\d{9}$'
-						name='floating_phone'
+						name='floating_mobile_no'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:invalid:border-red-600  focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={10}
-						value={data.phone}
-						onChange={(e) => setData({ ...data, phone: e.target.value })}
+						value={data.mobile_no}
+						onChange={(e) => setData({ ...data, mobile_no: e.target.value })}
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
-						Phone number (987654321)
+						mobile_no number (987654321)
 					</label>
 				</div>
 			</div>
@@ -176,7 +176,7 @@ const IdeaSubmission = () => {
 					</select>
 
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1'>
 						Department
 					</label>
@@ -196,7 +196,7 @@ const IdeaSubmission = () => {
 					</select>
 
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1'>
 						Year of study
 					</label>
@@ -206,16 +206,16 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
-						name='floating_phone'
+						name='floating_mobile_no'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
-						value={data.team}
-						onChange={(e) => setData({ ...data, team: e.target.value })}
+						value={data.team_member}
+						onChange={(e) => setData({ ...data, team_member: e.target.value })}
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base  text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
 						Name of other team members
 					</label>
@@ -232,7 +232,7 @@ const IdeaSubmission = () => {
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1 '>
 						Abstract/Report
 					</label>
@@ -242,7 +242,7 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='email'
-						name='floating_phone'
+						name='floating_mobile_no'
 						pattern='^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:invalid:border-red-600  focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
@@ -252,7 +252,7 @@ const IdeaSubmission = () => {
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3 '>
 						Email
 					</label>
@@ -260,7 +260,7 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
-						name='floating_phone'
+						name='floating_mobile_no'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
@@ -269,7 +269,7 @@ const IdeaSubmission = () => {
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
 						Relavance
 					</label>
@@ -307,7 +307,7 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
-						name='Name of the leader'
+						name='Name of the team_leader'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
@@ -316,7 +316,7 @@ const IdeaSubmission = () => {
 						required
 					/>
 					<label
-						htmlFor='Name of the leader'
+						htmlFor='Name of the team_leader'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
 						Innovation
 					</label>
@@ -333,18 +333,18 @@ const IdeaSubmission = () => {
 				<div className='relative z-0 w-full mb-8 group'>
 					<input
 						type='text'
-						name='floating_phone'
+						name='floating_mobile_no'
 						className='block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer'
 						placeholder=' '
 						maxLength={255}
-						value={data.impact}
-						onChange={(e) => setData({ ...data, impact: e.target.value })}
+						value={data.potential}
+						onChange={(e) => setData({ ...data, potential: e.target.value })}
 						required
 					/>
 					<label
-						htmlFor='floating_phone'
+						htmlFor='floating_mobile_no'
 						className='peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3'>
-						Potential for Impact
+						Potential for potential
 					</label>
 					<p className='text-sm text-gray-500 italic'>
 						*The proposed project addresses a pressing and important problem.
