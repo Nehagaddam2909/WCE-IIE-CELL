@@ -5,7 +5,38 @@ const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const handleClick = () => {};
+  const handleClick =async () => {
+    setLoading(true);
+    try {
+        //Login URL
+        await fetch("", {
+          method: "POST",
+          body: {email,password},
+        })
+          .then(async (res) => {
+            const data = await res.json();
+
+			setLoading(false);
+            if (data.success) {
+              alert("Login SuccessFull !!");
+			  window.location.href="/";
+
+            } else {
+              alert("Something went wrong !");
+            }
+          })
+          .catch((err) => {
+            setLoading(false);
+            alert("Something went wrong !");
+            console.log(err);
+          });
+
+        // // console.log(json);
+      } catch (error) {
+        alert("Something went wrong!");
+        // console.log(error);
+      }
+  };
   return (
     <div className="flex h-full items-center justify-center">
       {!loading && (
