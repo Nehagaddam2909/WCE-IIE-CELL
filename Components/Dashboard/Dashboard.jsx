@@ -36,7 +36,7 @@ const Dashboard = () => {
   return (
     <div className="mt-[2rem]">
       {!loading && (
-        <div className="m-[4rem]">
+        <div className="md:m-[4rem]">
           <MUIDataTable
             title={"Idea List"}
             columns={columns}
