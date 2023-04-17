@@ -38,7 +38,7 @@ const IdeaSubmission = () => {
     }
 
     if (flag) {
-		setLoading(true);
+      setLoading(true);
 
       const formData = new FormData();
       formData.append("title", data.title);
@@ -57,7 +57,7 @@ const IdeaSubmission = () => {
       formData.append("relevance", data.relevance);
       // console.table(formData);
       try {
-        await fetch("https://iie-cell-backend.onrender.com/api/idea/submit", {
+        await fetch("http://103.30.64.62/api/idea/submit", {
           method: "POST",
           body: formData,
         })
@@ -65,10 +65,10 @@ const IdeaSubmission = () => {
             const data = await res.json();
 
             // console.log(data);
-			setLoading(false);
+            setLoading(false);
             if (data.success) {
               alert("Idea submitted successfully !");
-			  window.location.href="/";
+              window.location.href = "/";
 
             } else {
               alert("Something went wrong !");
@@ -84,7 +84,7 @@ const IdeaSubmission = () => {
         // console.log(error);
       }
 
-     
+
     }
   };
   return (
@@ -115,12 +115,13 @@ const IdeaSubmission = () => {
           <h1 className="mb-12 text-center text-2xl font-extrabold md:text-5xl lg:text-4xl">
             Enrollment for Pre-Incubation
           </h1>
+          <div className="border bg-gray-50 p-4 py-8 rounded-lg">
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="title"
-                className="block py-2.5 px-0 w-full pl-3   bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
+                className="block py-2.5  px-0 w-full pl-3   bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer "
                 placeholder=" "
                 maxLength={255}
                 value={data.title}
@@ -129,16 +130,16 @@ const IdeaSubmission = () => {
               />
               <label
                 htmlFor="title"
-                className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3"
+                className="peer-focus:font-medium  absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3"
               >
                 Title
               </label>
             </div>
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="Name of the team_leader"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.team_leader}
@@ -156,33 +157,12 @@ const IdeaSubmission = () => {
             </div>
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
-              <select
-                required
-                value={data.role}
-                onChange={(e) => {
-                  // console.log(e.target.value);
-                  setData({ ...data, role: e.target.value });
-                }}
-                className="bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option value="student">Student</option>
-                <option value="teacher">Teacher</option>
-              </select>
-
-              <label
-                htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1"
-              >
-                Select type
-              </label>
-            </div>
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="tel"
                 pattern="^[6-9]\d{9}$"
                 name="floating_mobile_no"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:invalid:border-red-600  focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:invalid:border-red-600  focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={10}
                 value={data.mobile_no}
@@ -195,12 +175,31 @@ const IdeaSubmission = () => {
                 htmlFor="floating_mobile_no"
                 className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3"
               >
-                mobile_no number (987654321)
+                Mobile number (987654321)
+              </label>
+            </div>
+            <div className="relative z-0 bg-white w-full mb-8 group">
+              <input
+                type="email"
+                name="floating_mobile_no"
+                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:invalid:border-red-600  focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                maxLength={255}
+                value={data.email}
+                onChange={(e) => setData({ ...data, email: e.target.value })}
+                required
+              />
+              <label
+                htmlFor="floating_mobile_no"
+                className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3 "
+              >
+                Email
               </label>
             </div>
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <select
                 required
                 value={data.department}
@@ -219,12 +218,35 @@ const IdeaSubmission = () => {
 
               <label
                 htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1"
+                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md:-translate-y-10 pl-1"
               >
                 Department
               </label>
             </div>
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
+              <select
+                required
+                value={data.role}
+                onChange={(e) => {
+                  // console.log(e.target.value);
+                  setData({ ...data, role: e.target.value });
+                }}
+                className="bg-white border h-12 focus:outline-none border-black text-gray-900 text-sm  focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option value="student">Student</option>
+                <option value="teacher">Teacher</option>
+              </select>
+
+              <label
+                htmlFor="floating_mobile_no"
+                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md:-translate-y-10 pl-1"
+              >
+                Select type
+              </label>
+            </div>
+            
+          <div className="grid ">
+          <div className="relative z-0 bg-white w-full mb-8 group">
               <select
                 required
                 value={data.year}
@@ -241,18 +263,41 @@ const IdeaSubmission = () => {
 
               <label
                 htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1"
+                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md:-translate-y-10 pl-1"
               >
                 Year of study
               </label>
             </div>
           </div>
+
+            <div className="relative z-0 bg-white w-full mb-8 group">
+              <input
+                type="file"
+                accept="application/pdf,application/msword"
+                name="floating_company"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                maxLength={255}
+                onChange={(e) =>
+                  setData({ ...data, report: e.target.files[0] })
+                }
+                required
+              />
+              <label
+                htmlFor="floating_mobile_no"
+                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md:-translate-y-10 pl-1 "
+              >
+                Abstract/Report
+              </label>
+            </div>
+          </div>
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
+
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="floating_mobile_no"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.team_member}
@@ -268,79 +313,18 @@ const IdeaSubmission = () => {
                 Name of other team members
               </label>
             </div>
-            <div className="relative z-0 w-full mb-8 group">
-              <input
-                type="file"
-                accept="application/pdf,application/msword"
-                name="floating_company"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                maxLength={255}
-                onChange={(e) =>
-                  setData({ ...data, report: e.target.files[0] })
-                }
-                required
-              />
-              <label
-                htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base duration-300 transform  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 text-blue-500 -translate-y-9 md: -translate-y-10 pl-1 "
-              >
-                Abstract/Report
-              </label>
-            </div>
+
           </div>
+</div>
+  
+<div className='border bg-gray-50 p-4 py-8 rounded-lg mt-8'>
+           
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
-              <input
-                type="email"
-                name="floating_mobile_no"
-                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:invalid:border-red-600  focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                maxLength={255}
-                value={data.email}
-                onChange={(e) => setData({ ...data, email: e.target.value })}
-                required
-              />
-              <label
-                htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3 "
-              >
-                Email
-              </label>
-            </div>
-            <div className="relative z-0 w-full mb-8 group">
-              <input
-                type="text"
-                name="floating_mobile_no"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
-                placeholder=" "
-                maxLength={255}
-                value={data.relevance}
-                onChange={(e) =>
-                  setData({ ...data, relevance: e.target.value })
-                }
-                required
-              />
-              <label
-                htmlFor="floating_mobile_no"
-                className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3"
-              >
-                Relavance
-              </label>
-              <p className="text-sm text-gray-500 italic">
-                * Whether the identified problem really exists in
-                Society/Market/ Industry ? How big is the problem ? (Low,
-                Moderate, High)
-              </p>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="title"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.viability}
@@ -355,7 +339,7 @@ const IdeaSubmission = () => {
               >
                 Viability
               </label>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-500 italic bg-gray-50">
                 * The proposal is viable and the team has credibility to
                 implement it. The entry includes sufficient evidence of team
                 members’ expertise, training, skills, and the team has thought
@@ -363,11 +347,11 @@ const IdeaSubmission = () => {
                 their expressed goals and objectives.
               </p>
             </div>
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="Name of the team_leader"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.innovation}
@@ -382,7 +366,7 @@ const IdeaSubmission = () => {
               >
                 Innovation
               </label>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-500 italic bg-gray-50">
                 *The idea presented is a “novel, innovative or creative”
                 solution to the proposed problem. “Novel, innovative or
                 creative” solutions means either: (a) a new idea, method,
@@ -392,11 +376,11 @@ const IdeaSubmission = () => {
             </div>
           </div>
           <div className="grid md:grid-cols-2 md:gap-6">
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="floating_mobile_no"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.potential}
@@ -411,7 +395,7 @@ const IdeaSubmission = () => {
               >
                 Potential for potential
               </label>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-500 italic bg-gray-50">
                 *The proposed project addresses a pressing and important
                 problem. The team provides the sufficient data/research to
                 understand the problem and specific need(s) of the target
@@ -421,11 +405,11 @@ const IdeaSubmission = () => {
                 by implmenting this solution.
               </p>
             </div>
-            <div className="relative z-0 w-full mb-8 group">
+            <div className="relative z-0 bg-white w-full mb-8 group">
               <input
                 type="text"
                 name="floating_company"
-                className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                 placeholder=" "
                 maxLength={255}
                 value={data.applicability}
@@ -440,7 +424,7 @@ const IdeaSubmission = () => {
               >
                 Applicability
               </label>
-              <p className="text-sm text-gray-500 italic">
+              <p className="text-sm text-gray-500 italic bg-gray-50">
                 * (a) Usability: Level of acceptance of Solution/Features among
                 target group (b) Scalability: Adoption Potential of Solution as
                 Business Model/Startup (c) Economic Sustainability: Potential of
@@ -450,8 +434,37 @@ const IdeaSubmission = () => {
                 Existence of Intellectual Property Component, if any?
               </p>
             </div>
+          </div> 
+          <div className="grid md:grid-cols-2 md:gap-6">
+           
+        
+            <div className="relative z-0 bg-white w-full mb-8 group">
+              <input
+                type="text"
+                name="floating_mobile_no"
+                className="block py-2.5  px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                placeholder=" "
+                maxLength={255}
+                value={data.relevance}
+                onChange={(e) =>
+                  setData({ ...data, relevance: e.target.value })
+                }
+                required
+              />
+              <label
+                htmlFor="floating_mobile_no"
+                className="peer-focus:font-medium absolute text-sm md:text-base text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-10  top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0  peer-focus:-translate-y-9 md:peer-focus:-translate-y-10 pl-2 md:pl-3"
+              >
+                Relavance
+              </label>
+              <p className="text-sm text-gray-500 italic bg-gray-50">
+                * Whether the identified problem really exists in
+                Society/Market/ Industry ? How big is the problem ? (Low,
+                Moderate, High)
+              </p>
+            </div>
           </div>
-
+</div>
           <div className="flex justify-center ">
             <button
               type="button"
