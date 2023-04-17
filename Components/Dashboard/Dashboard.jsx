@@ -13,7 +13,7 @@ const Dashboard = () => {
   const FetchData = async () => {
     try {
       setLoading(true);
-      await fetch("", {
+      await fetch("http://103.30.64.62:5000/api/idea/responses", {
         method: "GET",
       })
         .then(async (res) => {
@@ -21,6 +21,8 @@ const Dashboard = () => {
 
           setLoading(false);
           if (data.success) {
+            console.log(data.data)
+          
             setData(data.data);
           }
         })
@@ -39,6 +41,7 @@ const Dashboard = () => {
         <div className="md:m-[4rem]">
           <MUIDataTable
             title={"Idea List"}
+            data={data}
             columns={columns}
             options={options}
           />
