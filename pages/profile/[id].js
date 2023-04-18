@@ -18,44 +18,48 @@ import { useEffect, useState } from "react";
 //   "date_time": "2023-04-16T18:30:00.000Z",
 //   "team_members": "Divya Kekakde,  Divya Kekade"
 // }
-const Id = () => {
-  const d = useRouter().query.id;
-  const [data, setData] = useState()
+const Id = ({data}) => {
+  const router = useRouter();
+  // const [data, setData] = useState()
   const [loading, setLoading] = useState(false);
   // console.log(d)
-  useEffect(() => {
-    FecthData();
-  }, [])
-  const FecthData = async () => {
-    try {
-      await fetch(`https://103.30.64.62/api/idea/${d}`, {
-        method: "GET",
-      })
-        .then(async (res) => {
-          const data = await res.json();
+  // useEffect(() => {
+  //   FecthData();
+  // }, [])
+  // const FecthData = async () => {
+  //   try {
+  //     await fetch(`https://103.30.64.62/api/idea/${d}`, {
+  //       method: "GET",
+  //     })
+  //       .then(async (res) => {
+  //         const data = await res.json();
 
-          console.log(data);
-          setLoading(false);
-          if (data.Success) {
-            setData(data.data);
-            //   alert("Idea submitted successfully !");
-            // window.location.href = "/";
+  //         console.log(data);
+  //         setLoading(false);
+  //         if (data.Success) {
+  //           setData(data.data);
+  //           //   alert("Idea submitted successfully !");
+  //           // window.location.href = "/";
 
-          } else {
-            alert("Something went wrong !");
-          }
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  //         } else {
+  //           alert("Something went wrong !");
+  //         }
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
 
-      // // console.log(json);
-    } catch (error) {
-      alert("Something went wrong!");
-      // console.log(error);
-    }
+  //     // // console.log(json);
+  //   } catch (error) {
+  //     alert("Something went wrong!");
+  //     // console.log(error);
+  //   }
 
+  // }
+  if (router.isFallback) {
+    return <div>Loading...</div>;
   }
+  console.log(data)
   const handleReportDownload = async (filename) => {
     await fetch('http://103.30.64.62:5000/report/' + filename, {
       method: "GET",
@@ -141,5 +145,28 @@ const Id = () => {
 };
 
 
+export async function getStaticPaths() {
+  // Get the list of all post IDs
+  const res = await fetch('http://103.30.64.62:5000/api/idea/responses');
+  const posts = await res.json();
+  const paths = posts.data.map((post) => `/profile/${post.entry_id}`);
 
+  return {
+    paths,
+    fallback: true, // Enable fallback for undefined paths
+  };
+}
+
+export async function getStaticProps({params}){
+  // Fetch the post data based on the ID
+  const res = await fetch(`http://103.30.64.62:5000/api/idea/${params.id}`);
+  const data = await res.json();
+
+  return {
+    props: {
+      data:data.data[0],
+    },
+    revalidate: 1, // Revalidate the data every 1 second
+  };
+}
 export default Id;

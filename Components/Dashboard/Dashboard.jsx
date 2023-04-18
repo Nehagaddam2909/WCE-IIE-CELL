@@ -20,7 +20,7 @@ const Dashboard = () => {
       })
         .then(async (res) => {
           const data = await res.json();
-
+          console.log(data)
           setLoading(false);
           if (data.success) {
             console.log(data.data)
