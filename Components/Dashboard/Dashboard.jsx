@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { columns } from "../../data/DashboardColumns";
 import MUIDataTable from "mui-datatables";
+import { getCookie, deleteCookie } from 'cookies-next';
+
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -33,6 +35,15 @@ const Dashboard = () => {
     } catch (error) {}
   };
   useEffect(() => {
+    const getCookieState=()=>{
+		const d=getCookie('token');
+    if(!d || !d.length)
+    {
+      alert("Admin login required...!!!");
+      window.location.href="/login";
+    }
+		}
+    getCookieState();
     FetchData();
   }, []);
   return (

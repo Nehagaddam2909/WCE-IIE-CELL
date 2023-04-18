@@ -22,71 +22,69 @@ const IdeaSubmission = () => {
     applicability: "",
     relevance: "",
   });
-  const handleSubmit = async () => {
-    // fetch call , dont use axios
-    // console.table(data)
-    // bool flag to check validity
-    let flag = 1;
-    // check if all fields are filled
-    for (const key in data) {
-      // console.log(key);
-      if (data[key] == undefined || data[key].length == 0) {
-        alert("Please fill required fileds !");
-        flag = 0;
-        return;
-      }
-    }
+	const handleSubmit = async () => {
+		// fetch call , dont use axios
+		// console.table(data)
+		// bool flag to check validity
+		let flag = 1;
+		// check if all fields are filled
+		for (const key in data) {
+			// console.log(key);
+			if (data[key] == undefined || data[key].length == 0) {
+				alert('Please fill required fileds !');
+				flag = 0;
+				return;
+			}
+		}
 
-    if (flag) {
-      setLoading(true);
+		if (flag) {
+			setLoading(true);
+			const formData = new FormData();
+			formData.append('title', data.title);
+			formData.append('team_leader', data.team_leader);
+			formData.append('role', data.role);
+			formData.append('mobile_no', data.mobile_no);
+			formData.append('email', data.email);
+			formData.append('department', data.department);
+			formData.append('year', data.year);
+			formData.append('team_member', data.team_member);
+			formData.append('report', data.report);
+			formData.append('viability', data.viability);
+			formData.append('potential', data.potential);
+			formData.append('innovation', data.innovation);
+			formData.append('applicability', data.applicability);
+			formData.append('relevance', data.relevance);
+			// console.table(formData);
+			try {
+				await fetch('http://103.30.64.62:5000/api/idea/submit', {
+					method: 'POST',
+					body: formData,
+				})
+					.then(async (res) => {
 
-      const formData = new FormData();
-      formData.append("title", data.title);
-      formData.append("team_leader", data.team_leader);
-      formData.append("role", data.role);
-      formData.append("mobile_no", data.mobile_no);
-      formData.append("email", data.email);
-      formData.append("department", data.department);
-      formData.append("year", data.year);
-      formData.append("team_member", data.team_member);
-      formData.append("report", data.report);
-      formData.append("viability", data.viability);
-      formData.append("potential", data.potential);
-      formData.append("innovation", data.innovation);
-      formData.append("applicability", data.applicability);
-      formData.append("relevance", data.relevance);
-      // console.table(formData);
-      try {
-        await fetch("http://103.30.64.62/api/idea/submit", {
-          method: "POST",
-          body: formData,
-        })
-          .then(async (res) => {
-            const data = await res.json();
+						const data = await res.json();
+						setLoading(false);
+						if (data.success) {
+							alert("Idea submitted successfully !");
+							window.location.href="/";
+			  
+						  } else {
+							alert("Something went wrong !");
+						  }
+					})
+					.catch((err) => {
+						alert("Something went wrong")
+						// console.log(err);
+						setLoading(false)
+					});
 
-            // console.log(data);
-            setLoading(false);
-            if (data.success) {
-              alert("Idea submitted successfully !");
-              window.location.href = "/";
-
-            } else {
-              alert("Something went wrong !");
-            }
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-
-        // // console.log(json);
-      } catch (error) {
-        alert("Something went wrong!");
-        // console.log(error);
-      }
-
-
-    }
-  };
+				// // console.log(json);
+			} catch (error) {
+				alert('Something went wrong!');
+				// console.log(error);
+			}
+		}
+	};
   return (
     <>
       {loading && (

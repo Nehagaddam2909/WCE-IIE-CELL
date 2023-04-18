@@ -1,27 +1,38 @@
 import { useState } from "react";
 import Link from "next/link";
-
+import { useCookies } from 'react-cookie';
 const Login = () => {
-  const [email, setEmail] = useState();
+  const [username, setusername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [cookie,setCookie] = useCookies();
   const handleClick =async () => {
     setLoading(true);
+    // console.log(username,password)
     try {
         //Login URL
-        await fetch("", {
+        const d={username,password}
+        await fetch("http://103.30.64.62:5000/api/auth/login", {
           method: "POST",
-          body: {email,password},
+          headers:{
+            "Content-Type":"application/json"
+          },
+          body:JSON.stringify(d),
         })
           .then(async (res) => {
             const data = await res.json();
 
 			setLoading(false);
-            if (data.success) {
+      console.log(data)
+            if (data.Success) {
               alert("Login SuccessFull !!");
-			  window.location.href="/";
+              // document.cookie.name = `name:token;val?ue:${data.jwt}`
+              setCookie("token",data.jwt)
+			        window.location.href="/dashboard";
+
 
             } else {
+
               alert("Something went wrong !");
             }
           })
@@ -41,31 +52,30 @@ const Login = () => {
     <div className="flex h-full items-center justify-center">
       {!loading && (
         <div className="  mt-[2rem]">
-          <div className="border bg-white p-6 shadow-lg">
-            <div variant="h3" color="black" className="xl font-bold">
+          <div className="min-w-[20rem] border bg-white p-6 shadow-lg">
+            <div variant="h3" color="black" className="text-xl font-bold">
               SignIn
             </div>
-            <div variant="paragraph" color="black" className="text-xs">
+            <div variant="paragraph" color="black" className="text-sm">
               Please fill the from to login
             </div>
             <hr className="my-2 h-2 w-full border-black" />
 
-            <div className="mb-3">
+            <div className="my-[1rem]">
               {/* <input type="text" id="small-input" className="block w-full px-3 py-2 border border-gray-300  focus:outline-blue-500"  placeholder="Department"/> */}
               <input
-                type="email"
-                id="Email"
-                pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                type="text"
+                id="username"
                 maxLength={255}
                 className="block py-2.5 px-0 w-full pl-3  text-gray-900 bg-transparent  border border-gray-300 appearance-none  dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:invalid:border-red-600  focus:ring-0 focus:border-blue-600 peer "
-                placeholder="Enter Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter username"
+                value={username}
+                onChange={(e) => setusername(e.target.value)}
                 required
               />
             </div>
 
-            <div className="mb-5 md:mb-6">
+            <div className="my-[1rem]">
               {/* <input type="text" id="small-input" className="block w-full px-3 py-2 border border-gray-300  focus:outline-blue-500"  placeholder="Department"/> */}
               <input
                 type="password"
@@ -77,9 +87,9 @@ const Login = () => {
                 required
               />
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center my-[2rem]">
               <button
-                className="text-sm Reach-us  lg:block text-white bg-primary whitespace-nowrap rounded-2xl py-1 px-5 mx-10"
+                className="text-md Reach-us lg:block text-white bg-primary whitespace-nowrap rounded-2xl py-1 px-5 mx-10"
                 onClick={handleClick}
               >
                 Sign In

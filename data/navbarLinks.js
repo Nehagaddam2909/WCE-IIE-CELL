@@ -30,10 +30,11 @@ const NavbarLinks = [
     name: "Login",
     link: "/login",
   },
-  {
-    name: "Dashboard",
-    link: "/dashboard",
-  },
+{
+  name:"Dashboard",
+  link:"/dashboard",
+}
+
 ];
 
 // Path: navbar.js

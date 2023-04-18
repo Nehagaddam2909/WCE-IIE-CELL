@@ -3,7 +3,7 @@ import tw from '../public/assets/icons/twitter.png';
 import yt from '../public/assets/icons/youtube.png';
 import gh from '../public/assets/icons/github.png';
 import ld from '../public/assets/icons/linkedin.png';
-const FooterLinks = [
+export const FooterLinks = [
     {
         title: 'Quick Links',
         links: [
@@ -49,8 +49,7 @@ const FooterLinks = [
         target:'_blank'
     },
 ];
-
-const SocialLinks = [
+export const SocialLinks = [
     { icon: ig, link: 'https://www.instagram.com' },
     { icon: tw, link: '#' },
     {
@@ -61,4 +60,4 @@ const SocialLinks = [
     { icon: ld, link: 'https://www.linkedin.com' },
 ];
 
-module.exports = { SocialLinks, FooterLinks };
+// module.exports = { SocialLinks, FooterLinks };

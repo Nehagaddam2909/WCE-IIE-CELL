@@ -6,7 +6,7 @@ const Section1 = () => {
 	return (
 		<div className='  Home-container  md:h-[35rem] pt-[2rem]  space-y-10 font-bold flex flex-col md:flex-row '>
 			<div className='text-sm md:text-base left h-full  flex flex-col justify-center items-start md:px-14 md:w-1/2'>
-				<p className=' text-primary text-4xl '>
+				<p className=' text-primary text-lg md:text-2xl lg:text-4xl '>
 				WCE INNOVATION INCUBATION AND ENTREPRENEURSHIP CELL 
 				</p>
 				<p className=' text-xl md:text-2xl w-3/4 pt-2 pb-5'>

@@ -51,7 +51,7 @@ const Sidebar = ({ showSidebar, setshowSidebar }) => {
 							<li key={index} className='rounded-sm'>
 								<a
 									// rel="noopener noreferrer"
-									href={link}
+									href={link.link}
 									className='flex hover:text-primary pl-5 items-center p-2 space-x-3 rounded-md'>
 									<span>{link.name}</span>
 								</a>

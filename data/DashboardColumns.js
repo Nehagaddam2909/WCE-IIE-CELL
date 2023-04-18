@@ -1,5 +1,5 @@
 // const columns=["Id", "Title", "Team Leader","Email", "Department", "Year", "More"];
-const columns = [
+export const columns = [
   {
     name: "entry_id",
     label: "Id",
@@ -64,6 +64,4 @@ const columns = [
     },
   },
 ];
-module.exports = {
-  columns,
-};
+
